@@ -9,9 +9,13 @@ const Controls = ({ problem, speed, setProblem, setSpeed }) => {
 
   const selectOperator = (event) => {
     const selectedOperator = event.currentTarget.textContent
+    let answer
+    selectedOperator === "+" ? (answer = problem.operand1+problem.operand2)
+      : (answer = problem.operand1*problem.operand2)
     setProblem({
       ...problem,
-      operator: selectedOperator
+      operator: selectedOperator,
+      answer: answer
     })
   }
 
