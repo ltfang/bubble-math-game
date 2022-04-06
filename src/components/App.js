@@ -14,6 +14,8 @@ const App = (props) => {
 
   const [score, setScore] = useState(0)
 
+  const [speed, setSpeed] = useState("Medium")
+
   const createProblem = () => {
     const operand1 = Math.floor(Math.random()*11)
     const operand2 = Math.floor(Math.random()*11)
@@ -44,7 +46,12 @@ const App = (props) => {
         <Problem problem={problem}/>
       </div>
       <Score score={score} />
-      <Controls problem={problem} />
+      <Controls 
+        problem={problem} 
+        speed={speed} 
+        setProblem={setProblem}
+        setSpeed={setSpeed}
+      />
     </div>
   );
 }

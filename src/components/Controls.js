@@ -1,16 +1,61 @@
 import React from 'react'
 
-const Controls = props => {
+const Controls = ({ problem, speed, setProblem, setSpeed }) => {
+
+  const selectSpeed = (event) => {
+    const selectedSpeed = event.currentTarget.textContent
+    setSpeed(selectedSpeed)
+  }
+
+  const selectOperator = (event) => {
+    const selectedOperator = event.currentTarget.textContent
+    setProblem({
+      ...problem,
+      operator: selectedOperator
+    })
+  }
+
+  const speedOptions = ["Slow", "Medium", "Fast"]
+  const speedControls = speedOptions.map(speedOption => {
+    let speedClass = "speed control"
+    if (speedOption===speed) {
+      speedClass += " selected"
+    }
+    return(
+      <div 
+        key={speedOption} 
+        className={speedClass}
+        onClick={selectSpeed}
+      >
+        {speedOption}
+      </div>
+    )
+  })
+
+  const operatorOptions = ["+", "x"]
+  const operatorControls = operatorOptions.map(operatorOption => {
+    let operatorClass = "control"
+    if (problem.operator===operatorOption) {
+      operatorClass += " selected"
+    }
+    return(
+      <div 
+        key={operatorOption} 
+        className={operatorClass}
+        onClick={selectOperator}
+      >
+        {operatorOption}
+      </div>
+    )
+  })
+
   return (
     <div className="controls">
       <div className="speed-control">
-        <div className="speed control slow">Slow</div>
-        <div className="speed control medium">Medium</div>
-        <div className="speed control fast">Fast</div>
+        {speedControls}
       </div>
       <div className="operator-panel">
-        <div className="plus control">+</div>
-        <div className="times control">x</div>
+        {operatorControls}
       </div>
     </div>
   )
